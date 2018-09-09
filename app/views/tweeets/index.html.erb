@@ -6,8 +6,8 @@
     Bio: <%= current_user.bio %><br><br>
     Image: <img src="<%= current_user.image_url %>" width="125px" height="125px" alt="<%= current_user.name %>">
   </p>
-
-<h1>Tweeets</h1>
+<br><br>
+<h1>Tweeets</h1><br><br>
 
 <table>
   <thead>
@@ -20,10 +20,24 @@
   <tbody>
     <% @tweeets.each do |tweeet| %>
       <tr>
-        <td><%= tweeet.tweeet %></td>
-        <td><%= link_to 'Show', tweeet %></td>
-        <td><%= link_to 'Edit', edit_tweeet_path(tweeet) %></td>
-        <td><%= link_to 'Destroy', tweeet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td width="300px"><%= tweeet.tweeet %></td>
+        <td width="200px"><b>written by</b>
+          <% if user_signed_in? == true && current_user.name == tweeet.user.name %>
+          <%= link_to current_user.name, edit_user_registration_url %>
+          <% else %><i><%= tweeet.user.name %><i>
+          <% end %>
+        </td>
+
+        <td width="50px">
+          <% if user_signed_in? == true && current_user.name == tweeet.user.name %>
+          <%= link_to 'Edit', edit_tweeet_path(tweeet) %>
+          <% end %>
+        </td>
+        <td width="50px">
+          <% if user_signed_in? == true && current_user.name == tweeet.user.name %>
+          <%= link_to 'Destroy', tweeet, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+          </td>
       </tr>
     <% end %>
   </tbody>

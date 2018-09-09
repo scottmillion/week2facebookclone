@@ -1,5 +1,6 @@
 class TweeetsController < ApplicationController
   before_action :set_tweeet, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /tweeets
   # GET /tweeets.json
@@ -10,12 +11,13 @@ class TweeetsController < ApplicationController
   # GET /tweeets/1
   # GET /tweeets/1.json
   def show
-  
+
   end
 
   # GET /tweeets/new
   def new
-    @tweeet = Tweeet.new
+    @tweeet = current_user.tweeets.build
+#    @tweeet = Tweeet.new
   end
 
   # GET /tweeets/1/edit
@@ -25,7 +27,8 @@ class TweeetsController < ApplicationController
   # POST /tweeets
   # POST /tweeets.json
   def create
-    @tweeet = Tweeet.new(tweeet_params)
+#    @tweeet = Tweeet.new(tweeet_params)
+    @tweeet = current_user.tweeets.build(tweeet_params)
 
     respond_to do |format|
       if @tweeet.save

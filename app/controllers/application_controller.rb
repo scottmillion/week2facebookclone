@@ -9,5 +9,8 @@ class ApplicationController < ActionController::Base
 
   end
 
+  def show
+    require_login
+  end
 
 end

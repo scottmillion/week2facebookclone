@@ -10,6 +10,7 @@ class TweeetsController < ApplicationController
   # GET /tweeets/1
   # GET /tweeets/1.json
   def show
+  
   end
 
   # GET /tweeets/new

@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :authenticate_user!
   protect_from_forgery with: :exception
 
   before_action :sanitize_devise_params, if: :devise_controller?
@@ -10,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def show
-    require_login
+
   end
 
 end
